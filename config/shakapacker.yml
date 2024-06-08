@@ -1,0 +1,30 @@
+# config/shakapacker.yml
+default: &default
+  source_path: app/javascript
+  source_entry_path: packs
+  public_output_path: packs
+  cache_path: tmp/shakapacker-cache
+  extensions:
+    - .jsx
+    - .js
+    - .sass
+    - .scss
+    - .css
+    - .png
+    - .svg
+    - .gif
+    - .jpeg
+    - .jpg
+  cache_manifest: false
+
+development:
+  <<: *default
+  compile: true
+
+test:
+  <<: *default
+  compile: true
+
+production:
+  <<: *default
+  compile: false
