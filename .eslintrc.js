@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: ["prettier", "react"],
   rules: {
+    "comma-dangle": "off",
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "react/function-component-definition": [

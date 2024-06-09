@@ -21,10 +21,11 @@
     "@types/webpack": "5",
     "babel-loader": "8",
     "compression-webpack-plugin": "9",
-    "eslint-config-wesbos": "^4.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-refresh": "^0.14.2",
+    "react-router-dom": "^6.23.1",
     "shakapacker": "^8.0.0",
     "terser-webpack-plugin": "5",
     "webpack": "5",
@@ -38,6 +39,8 @@
     "defaults"
   ],
   "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.2",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "eslint": "^8.0.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",

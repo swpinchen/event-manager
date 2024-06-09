@@ -1,6 +1,16 @@
-// See the shakacode/shakapacker README and docs directory for advice on customizing your webpackConfig.
 const { generateWebpackConfig } = require("shakapacker");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
-const webpackConfig = generateWebpackConfig();
+const webpackConfig = generateWebpackConfig({
+  plugins: [
+    new ReactRefreshWebpackPlugin(),
+    // other plugins
+  ],
+  resolve: {
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+    },
+  },
+});
 
 module.exports = webpackConfig;
