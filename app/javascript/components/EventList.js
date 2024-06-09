@@ -32,7 +32,7 @@ EventList.propTypes = {
       speaker: PropTypes.string,
       host: PropTypes.string,
       published: PropTypes.bool,
-    })
+    }),
   ).isRequired,
 };
 
