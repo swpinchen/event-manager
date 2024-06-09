@@ -7,3 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+file_path = File.join(Rails.root, 'db', 'events.json')
+events = JSON.parse(File.read(file_path))
+events.each do |record|
+  Event.create!(record)
+end

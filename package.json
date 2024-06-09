@@ -17,6 +17,7 @@
     "@types/webpack": "5",
     "babel-loader": "8",
     "compression-webpack-plugin": "9",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "shakapacker": "^8.0.0",
@@ -32,6 +33,12 @@
     "defaults"
   ],
   "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "webpack-dev-server": "4"
   }
 }
