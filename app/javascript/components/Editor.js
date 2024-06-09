@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Event from "./Event";
 import Header from "./Header";
 import EventList from "./EventList";
+import EventForm from "./EventForm";
 
 const Editor = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,12 +30,69 @@ const Editor = () => {
     fetchData();
   }, []);
 
+  const addEvent = async (newEvent) => {
+    try {
+      const response = await window.fetch("/api/events", {
+        method: "POST",
+        body: JSON.stringify(newEvent),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) throw Error(response.statusText);
+
+      const savedEvent = await response.json();
+      const newEvents = [...events, savedEvent];
+      setEvents(newEvents);
+      window.alert("Event Added!");
+      navigate(`/events/${savedEvent.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteEvent = async (eventId) => {
+    const sure = window.confirm("Are you sure?");
+
+    if (sure) {
+      try {
+        const response = await window.fetch(`/api/events/${eventId}`, {
+          method: "DELETE",
+        });
+
+        if (!response.ok) throw Error(response.statusText);
+
+        window.alert("Event Deleted!");
+        navigate("/events");
+        setEvents(events.filter((event) => event.id !== eventId));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <>
       <Header />
-      {isError && <p>Something went wrong. Check the console.</p>}
+      <div className="grid">
+        {isError && <p>Something went wrong. Check the console.</p>}
+        {isLoading ? (
+          <p className="loading">Loading...</p>
+        ) : (
+          <>
+            <EventList events={events} />
 
-      {isLoading ? <p>Loading...</p> : <EventList events={events} />}
+            <Routes>
+              <Route path="new" element={<EventForm onSave={addEvent} />} />
+              <Route
+                path=":id"
+                element={<Event events={events} onDelete={deleteEvent} />}
+              />
+            </Routes>
+          </>
+        )}
+      </div>
     </>
   );
 };

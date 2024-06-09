@@ -1,16 +1,18 @@
+/* eslint-disable react/no-deprecated */
 import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { BrowserRouter } from "react-router-dom";
 import App from "../components/App";
 
-if (typeof document !== "undefined") {
-  const container = document.getElementById("root");
-  const root = createRoot(container);
-
-  document.addEventListener("DOMContentLoaded", () => {
-    root.render(
-      <StrictMode>
+document.addEventListener("DOMContentLoaded", () => {
+  ReactDOM.render(
+    <StrictMode>
+      <BrowserRouter>
         <App />
-      </StrictMode>
-    );
-  });
-}
+      </BrowserRouter>
+    </StrictMode>,
+    // eslint-disable-next-line prettier/prettier
+    document.getElementById("root")
+  );
+});

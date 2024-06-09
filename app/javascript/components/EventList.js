@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Link } from "react-router-dom";
 
 const EventList = ({ events }) => {
   const renderEvents = (eventArray) => {
@@ -7,16 +9,21 @@ const EventList = ({ events }) => {
 
     return eventArray.map((event) => (
       <li key={event.id}>
-        {event.event_date}
-        {" - "}
-        {event.event_type}
+        <Link to={`/events/${event.id}`}>
+          {event.event_date}
+          {" - "}
+          {event.event_type}
+        </Link>
       </li>
     ));
   };
 
   return (
-    <section>
-      <h2>Events</h2>
+    <section className="eventList">
+      <h2>
+        Events
+        <Link to="/events/new">New Event</Link>
+      </h2>
       <ul>{renderEvents(events)}</ul>
     </section>
   );
@@ -32,7 +39,8 @@ EventList.propTypes = {
       speaker: PropTypes.string,
       host: PropTypes.string,
       published: PropTypes.bool,
-    }),
+      // eslint-disable-next-line prettier/prettier
+    })
   ).isRequired,
 };
 
