@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import { isEmptyObject, validateEvent } from "../helpers/helpers";
+import Pikaday from "pikaday";
+import { isEmptyObject, validateEvent, formatDate } from "../helpers/helpers";
 
 const EventForm = ({ onSave }) => {
   const [event, setEvent] = useState({
@@ -13,14 +14,34 @@ const EventForm = ({ onSave }) => {
   });
 
   const [formErrors, setFormErrors] = useState({});
+  const dateInput = useRef(null);
+
+  const updateEvent = (key, value) => {
+    setEvent((prevEvent) => ({ ...prevEvent, [key]: value }));
+  };
 
   const handleInputChange = (e) => {
     const { target } = e;
     const { name } = target;
     const value = target.type === "checkbox" ? target.checked : target.value;
 
-    setEvent({ ...event, [name]: value });
+    updateEvent(name, value);
   };
+
+  useEffect(() => {
+    const p = new Pikaday({
+      field: dateInput.current,
+      onSelect: (date) => {
+        const formattedDate = formatDate(date);
+        dateInput.current.value = formattedDate;
+        updateEvent("event_date", formattedDate);
+      },
+    });
+
+    // Return a cleanup function.
+    // React will call this prior to unmounting.
+    return () => p.destroy();
+  }, []);
 
   const renderErrors = () => {
     if (isEmptyObject(formErrors)) {
@@ -74,7 +95,8 @@ const EventForm = ({ onSave }) => {
               type="text"
               id="event_date"
               name="event_date"
-              onChange={handleInputChange}
+              ref={dateInput}
+              autoComplete="off"
             />
           </label>
         </div>
