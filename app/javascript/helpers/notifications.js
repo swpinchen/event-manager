@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { toast, Flip } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import "react-toastify/dist/ReactToastify.css";
 
 const defaults = {
   position: "top-right",

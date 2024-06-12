@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import Pikaday from "pikaday";
 import { isEmptyObject, validateEvent, formatDate } from "../helpers/helpers";
+import "pikaday/css/pikaday.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const EventForm = ({ onSave }) => {
   const [event, setEvent] = useState({
@@ -38,8 +40,6 @@ const EventForm = ({ onSave }) => {
       },
     });
 
-    // Return a cleanup function.
-    // React will call this prior to unmounting.
     return () => p.destroy();
   }, []);
 

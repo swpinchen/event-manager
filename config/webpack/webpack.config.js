@@ -8,10 +8,7 @@ const customConfig = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          "style-loader", // Injects styles into the DOM
-          "css-loader", // Interprets `@import` and `url()` like `import/require()` and will resolve them
-        ],
+        // use: ["style-loader", "css-loader"],
       },
     ],
   },

@@ -205,3 +205,18 @@
     justify-content: center;
     align-content: center;
   }
+
+  .Toastify__toast {
+    display: flex;
+    align-items: center;
+  }
+
+  .Toastify__toast-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .Pikaday {
+    width: auto; /* Ensure the date picker doesn't take full width */
+  }
